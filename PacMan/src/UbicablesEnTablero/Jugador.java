@@ -1,4 +1,4 @@
-package Entidades;
+package UbicablesEnTablero;
 
 public class Jugador { 
     private final double multiplicadorDeVelocidad = 1;
