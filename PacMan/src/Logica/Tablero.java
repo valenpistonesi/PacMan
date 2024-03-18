@@ -2,7 +2,8 @@ package Logica;
 
 import java.util.LinkedList;
 import Interfaces.UbicableEnTablero;
-import UbicablesEnTablero.otros.Pared;
+import UbicablesEnTablero.otros.*;
+import UbicablesEnTablero.Fantasmas.*;
 import Interfaces.EntidadConMovimiento;
 
 public class Tablero{
@@ -31,7 +32,7 @@ public class Tablero{
 
 
     public void cargarTablero(){
-        for (int i = 0; i< sizeTablero; i++){
+        /*for (int i = 0; i< sizeTablero; i++){
             tablero[i][0] = new Pared(i,0);
         }
         for (int i = 0; i< sizeTablero; i++){
@@ -50,7 +51,8 @@ public class Tablero{
                     tablero[i][j].CrearRepGrafica(32);
                 }
             }
-        }
+        }*/
+        lectorNiveles.readFile(1);
 
 
     }
@@ -61,7 +63,36 @@ public class Tablero{
     }
 
     public void agregarPared(int x, int y){
+        tablero[x][y] = new Pared(x,y);
+
+    }
+
+    public void agregarPunto(int x, int y){
+        tablero[x][y] = new Punto(x,y);
+
+    }
+
+    public void agregarBlinky(int x, int y) {
+        tablero[x][y] = new Blinky(x,y);}
+
+    public void agregarClyde(int x, int y) {
+        tablero[x][y] = new Clyde(x,y);}
         
+    public void agregarInky(int x, int y) {
+        tablero[x][y] = new Inky(x,y);}
+
+    public void agregarPinky(int x, int y) {
+        tablero[x][y] = new Pinky(x,y);}
+
+
+    public void agregarStrawberry(int x, int y) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'agregarStrawberry'");
+    }
+
+    public void agregarProtagonista(int x, int y) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'agregarProtagonista'");
     }
 
 }

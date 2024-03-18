@@ -17,7 +17,7 @@ import Interfaces.UbicableEnTablero;
 import Logica.Tablero;
 
 public class GUI extends JFrame {
-    public final int SIZE_CELDA = 32;
+    public final int SIZE_CELDA = 50;
     private final int ALTO_PANEL_VIDAS = 50;
     private final int MARGEN_IZQUIERDO = 50;
     private final int MARGEN_SUPERIOR = 50;
@@ -42,7 +42,7 @@ public class GUI extends JFrame {
         this.pack();//hace que entre mejor 
         this.setLocationRelativeTo(null); 
         this.setSize(SIZE_CELDA*cantCeldasTablero+MARGEN_IZQUIERDO*2,SIZE_CELDA*cantCeldasTablero+MARGEN_IZQUIERDO*2);
-        //this.setResizable(false);
+        this.setResizable(false);
         this.setLayout(null);
         this.setVisible(true);
         this.getContentPane().setBackground(Color.BLACK);
@@ -58,7 +58,27 @@ public class GUI extends JFrame {
 
         t.cargarTablero();
         agregarElementosGUI();
+        izqDerecha();
         
+    }
+
+    public void izqDerecha(){
+        JLabel l =tablero.getEntidad(4,8).getRepGrafica();
+        int x = 1;
+        boolean volver = false;
+        while (true){
+
+            if(x == 19)
+                volver = true;
+
+            if(x == 1)
+            volver = false;
+            if(volver)
+                x = x-1;
+            else x = x+1;
+            l.setLocation(convertirValorX(x), convertirValorY(8));
+
+        }
     }
 
     public void agregarElementosGUI(){
@@ -66,18 +86,18 @@ public class GUI extends JFrame {
         for(int i = 0; i<cantCeldasTablero; i++){
             for(int j = 0; j < cantCeldasTablero; j++){
                 e =tablero.getEntidad(i, j);
-                System.out.println("a crear "+i+"   "+j);
+                //System.out.println("a crear "+i+"   "+j);
                 if(e!= null){
                     if(e.getRepGrafica()!= null){}
                         e.CrearRepGrafica(SIZE_CELDA);
-                        System.out.println("creado  "+convertirValorX(i)+"   "+convertirValorY(j));
+                        //System.out.println("creado  "+convertirValorX(i)+"   "+convertirValorY(j));
                         e.getRepGrafica().setLocation(convertirValorX(i),convertirValorY(j));
                         panelPrinc.add(e.getRepGrafica());}
 
             }
         }
         repaint();
-        entidadesMoviles =tablero.obtenerEntidadesMobiles();
+        //entidadesMoviles =tablero.obtenerEntidadesMobiles();
     }
 
     //convierte un valor de x del tablero a ubicacion en la gui
@@ -100,10 +120,7 @@ public class GUI extends JFrame {
             this.setPreferredSize(new Dimension(600,600));
             this.setLayout(null);
             this.setBackground(Color.DARK_GRAY);
-        }
-
-
-    
+        }   
     }
 
     public class PanelVidas extends JPanel {
@@ -111,10 +128,6 @@ public class GUI extends JFrame {
         public PanelVidas(int cantCelda){
             this.setBounds(0,0,SIZE_CELDA*cantCeldasTablero+MARGEN_IZQUIERDO*2 , 50);
             this.setBackground(Color.blue);
-
         }
-        
     }
-
-    
 }

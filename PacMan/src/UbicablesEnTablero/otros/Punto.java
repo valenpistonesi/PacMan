@@ -21,11 +21,11 @@ public class Punto implements UbicableEnTablero{
     }
     
     public void CrearRepGrafica(int sizeCelda){
+        System.out.println("creacion de dot");
         imagen = new ImageIcon("src/assets/other/dot.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);
-        repGrafica.setText("mocos");
         repGrafica.setIcon(imagen);
 
     }

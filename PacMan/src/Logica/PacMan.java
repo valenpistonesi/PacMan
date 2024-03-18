@@ -8,7 +8,6 @@ public class PacMan {
         
         GUI g = new GUI(t);
         System.out.println("Hello, World!");
-        Tablero a= new Tablero();
         
     }
 }
