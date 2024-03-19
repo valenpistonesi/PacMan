@@ -22,6 +22,9 @@ class TimerJuego extends Thread {
         while (true) {
             try {
                 System.out.println("no paro de mandar mensajes soy re denso");
+                tablero.moverEntidades();
+                graficos.actualizarPosiciones();
+
 
                 Thread.sleep(tiempo); // Esperar el tiempo especificado
             } catch (InterruptedException e) {

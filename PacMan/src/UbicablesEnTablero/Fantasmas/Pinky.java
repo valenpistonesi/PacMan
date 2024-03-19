@@ -6,17 +6,16 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Interfaces.UbicableEnTablero;
+import Utilidades.CuadruplaBooleana;
+import Utilidades.DuplaDoble;
 
-public class Pinky implements UbicableEnTablero{
-    private double parUbicacion[];
+public class Pinky extends Fantasma {
+    private DuplaDoble parUbicacion;
     private JLabel repGrafica;
     private ImageIcon imagen;
 
     public Pinky(int x, int y){
-        parUbicacion = new double[2];
-        parUbicacion[0] = x;
-        parUbicacion[1]= y;
+        super(x, y);
     }
     
     public void CrearRepGrafica(int sizeCelda){
@@ -32,8 +31,20 @@ public class Pinky implements UbicableEnTablero{
         return repGrafica;
     }
 
-    public double[] getUbicacion(){
+    public DuplaDoble getUbicacion(){
         return parUbicacion;
 
+    }
+
+    @Override
+    public void actualizarPosicionGrafica() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
+    }
+
+    @Override
+    public void moverse(double v,CuadruplaBooleana i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moverse'");
     }
 }

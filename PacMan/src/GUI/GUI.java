@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -12,12 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 import Interfaces.EntidadConMovimiento;
-import Interfaces.UbicableEnTablero;
+import Interfaces.EntidadRepresentable;
 import Logica.Tablero;
+import Utilidades.DuplaDoble;
 
 public class GUI extends JFrame {
-    public final int SIZE_CELDA = 50;
+    public final int SIZE_CELDA = 32;
     private final int ALTO_PANEL_VIDAS = 50;
     private final int MARGEN_IZQUIERDO = 50;
     private final int MARGEN_SUPERIOR = 50;
@@ -49,40 +52,25 @@ public class GUI extends JFrame {
         this.getContentPane().add(new PanelVidas(cantCeldasTablero));
         panelPrinc = new PanelBase(cantCeldasTablero);
         this.getContentPane().add(panelPrinc);
-
-        /*JLabel j = new JLabel();
-        j.setText("chau");
-        j.setBounds(1,200,50,50);
-        j.setForeground(Color.GREEN);
-        panelPrinc.add(j);*/
-
-        t.cargarTablero();
-        agregarElementosGUI();
-        izqDerecha();
+        this.addKeyListener(tablero.getLectorDeTeclado());
         
     }
 
-    public void izqDerecha(){
-        JLabel l =tablero.getEntidad(4,8).getRepGrafica();
-        int x = 1;
-        boolean volver = false;
-        while (true){
-
-            if(x == 19)
-                volver = true;
-
-            if(x == 1)
-            volver = false;
-            if(volver)
-                x = x-1;
-            else x = x+1;
-            l.setLocation(convertirValorX(x), convertirValorY(8));
-
+    public void actualizarPosiciones(){
+        LinkedList<EntidadConMovimiento> lista =tablero.obtenerEntidadesMobiles();
+        Iterator<EntidadConMovimiento> it = lista.iterator(); 
+        EntidadConMovimiento ecm;
+        while(it.hasNext()){
+            ecm = it.next();
+            DuplaDoble ubi =ecm.getUbicacion();
+            ecm.getRepGrafica().setLocation(convertirValorX(ubi.getX()),convertirValorY(ubi.getY()));
         }
+
+
     }
 
     public void agregarElementosGUI(){
-        UbicableEnTablero e;
+        EntidadRepresentable e;
         for(int i = 0; i<cantCeldasTablero; i++){
             for(int j = 0; j < cantCeldasTablero; j++){
                 e =tablero.getEntidad(i, j);
@@ -90,6 +78,7 @@ public class GUI extends JFrame {
                 if(e!= null){
                     if(e.getRepGrafica()!= null){}
                         e.CrearRepGrafica(SIZE_CELDA);
+                        tablero.removerDelTablero(i, j);
                         //System.out.println("creado  "+convertirValorX(i)+"   "+convertirValorY(j));
                         e.getRepGrafica().setLocation(convertirValorX(i),convertirValorY(j));
                         panelPrinc.add(e.getRepGrafica());}
@@ -101,13 +90,15 @@ public class GUI extends JFrame {
     }
 
     //convierte un valor de x del tablero a ubicacion en la gui
-    public int convertirValorX(int i){
-        return i*SIZE_CELDA+MARGEN_IZQUIERDO;
+    public int convertirValorX(double i){ 
+        double toReturn =i*SIZE_CELDA+MARGEN_IZQUIERDO;
+        return (int) Math.round(toReturn);
     }
 
     //convierte un valor de y del tablero a ubicacion en la gui
-    public int convertirValorY(int i){  
-        return i*SIZE_CELDA+MARGEN_SUPERIOR;
+    public int convertirValorY(double i){  
+        double toReturn =i*SIZE_CELDA+MARGEN_SUPERIOR;
+        return (int) Math.round(toReturn);
     }
 
 

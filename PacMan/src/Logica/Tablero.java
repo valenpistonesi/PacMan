@@ -1,89 +1,113 @@
 package Logica;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-import Interfaces.UbicableEnTablero;
+
+
+import Interfaces.EntidadRepresentable;
 import UbicablesEnTablero.otros.*;
+import Utilidades.CuadruplaBooleana;
+import Utilidades.DuplaDoble;
+import UbicablesEnTablero.Jugador;
 import UbicablesEnTablero.Fantasmas.*;
 import Interfaces.EntidadConMovimiento;
 
 public class Tablero{
-    private final int sizeTablero = 20;
-    private final int velocidadDeJuego = 1;
+    private final int SIZE_TABLERO = 20;
+    private final int VELOCIDAD_JUEGO = 1;
+    private final int MAX_LEVEL = 3;
 
     private LectorDeTeclado lectorTeclado;
-    private TimerJuego timer;
-    private UbicableEnTablero [][] tablero;
-    private LinkedList <EntidadConMovimiento> entidades;
+    private EntidadRepresentable [][] tablero;
+    private LinkedList <EntidadConMovimiento> entidadesMobiles;
     private EstadoDeJuego estado;
     private LectorDeNiveles lectorNiveles;
+    private Jugador pacMan;
 
     public Tablero(){
-        tablero = new UbicableEnTablero[sizeTablero][sizeTablero];
+        tablero = new EntidadRepresentable[SIZE_TABLERO][SIZE_TABLERO];
         lectorNiveles = new LectorDeNiveles(this);
+        entidadesMobiles =new LinkedList<EntidadConMovimiento>(); 
+        lectorTeclado = new LectorDeTeclado();
+    }
+
+    public void moverEntidades(){
+        Iterator<EntidadConMovimiento> it =  entidadesMobiles.iterator();
+        EntidadConMovimiento e;
+        DuplaDoble dup;
+        while(it.hasNext()){
+            e = it.next();
+            dup = e.getUbicacion();
+            e.moverse(VELOCIDAD_JUEGO, ObtenerContexto((int)Math.round(dup.getX()),(int)Math.round(dup.getY())));
+        }
+        //control de colisiones
+    }
+
+    public CuadruplaBooleana ObtenerContexto(int x, int y){
+        CuadruplaBooleana c = new CuadruplaBooleana();
+        if(x >= 0 && x < cantCeldas()-1){
+            if(tablero[x+1][y] != null){
+                c.setDireccion(tablero[x+1][y].objetoSolido(), 0);}
+            else c.setDireccion(false, 0);}
+        if(y >= 0+1 && y < cantCeldas()){
+            if(tablero[x][y-1] != null){
+                c.setDireccion(tablero[x][y-1].objetoSolido(), 1);}
+            else c.setDireccion(false, 1);}
+        if(x >= 0+1 && x < cantCeldas()){
+            if(tablero[x-1][y] != null){
+                c.setDireccion(tablero[x-1][y].objetoSolido(), 2);}
+            else c.setDireccion(false, 2);}
+        if(y>=0 && y<cantCeldas()-1){
+            if(tablero[x][y+1] != null){
+                c.setDireccion(tablero[x][y+1].objetoSolido(), 3);}
+            else c.setDireccion(false, 3);}
+
+        return c;
     }
 
     public int cantCeldas(){
-        return sizeTablero;
+        return SIZE_TABLERO;
     }
 
-    public UbicableEnTablero getEntidad(int x, int y){
+    public EntidadRepresentable getEntidad(int x, int y){
         return tablero[x][y];
     }
 
-
-    public void cargarTablero(){
-        /*for (int i = 0; i< sizeTablero; i++){
-            tablero[i][0] = new Pared(i,0);
-        }
-        for (int i = 0; i< sizeTablero; i++){
-            tablero[0][i] = new Pared(i,sizeTablero-1);
-        }
-        for (int i = 0; i< sizeTablero; i++){
-            tablero[cantCeldas()-1][i] = new Pared(0,i);
-        }
-        for (int i = 0; i< sizeTablero; i++){
-            tablero[i][cantCeldas()-1] = new Pared(sizeTablero-1,i);
-        }
-
-        for(int i = 0; i<sizeTablero; i++){
-            for(int j = 0; j<sizeTablero; j++){
-                if(tablero[i][j] != null){
-                    tablero[i][j].CrearRepGrafica(32);
-                }
-            }
-        }*/
-        lectorNiveles.readFile(1);
+    public void LimpiarTablero(){
+        //eliminar la tabla, sacar elementos de gui y poder empezar de cero
+    }
 
 
+    public void cargarTablero(int i){
+        lectorNiveles.readFile(i);
     }
 
     public LinkedList<EntidadConMovimiento> obtenerEntidadesMobiles() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerEntidadesMobiles'");
+        return entidadesMobiles;
     }
 
     public void agregarPared(int x, int y){
         tablero[x][y] = new Pared(x,y);
-
     }
-
     public void agregarPunto(int x, int y){
         tablero[x][y] = new Punto(x,y);
-
     }
 
     public void agregarBlinky(int x, int y) {
-        tablero[x][y] = new Blinky(x,y);}
+        tablero[x][y] = new Blinky(x,y);
+        entidadesMobiles.addLast((EntidadConMovimiento)tablero[x][y]);}
 
     public void agregarClyde(int x, int y) {
-        tablero[x][y] = new Clyde(x,y);}
+        tablero[x][y] = new Clyde(x,y);
+        entidadesMobiles.addLast((EntidadConMovimiento)tablero[x][y]);}
         
     public void agregarInky(int x, int y) {
-        tablero[x][y] = new Inky(x,y);}
+        tablero[x][y] = new Inky(x,y);
+        entidadesMobiles.addLast((EntidadConMovimiento)tablero[x][y]);}
 
     public void agregarPinky(int x, int y) {
-        tablero[x][y] = new Pinky(x,y);}
-
+        tablero[x][y] = new Pinky(x,y);
+        entidadesMobiles.addLast((EntidadConMovimiento)tablero[x][y]);}
 
     public void agregarStrawberry(int x, int y) {
         // TODO Auto-generated method stub
@@ -91,8 +115,22 @@ public class Tablero{
     }
 
     public void agregarProtagonista(int x, int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'agregarProtagonista'");
+       pacMan = new Jugador(x,y);
+       tablero[x][y] = pacMan;
+       entidadesMobiles.addLast(pacMan);
+       lectorTeclado.asignar(pacMan);
+    }
+
+    public int getMaxLevel(){
+        return MAX_LEVEL;
+    }
+
+    public LectorDeTeclado getLectorDeTeclado(){
+        return lectorTeclado;
+    }
+
+    public void removerDelTablero(int x, int y){
+        tablero[x][y] = null;
     }
 
 }

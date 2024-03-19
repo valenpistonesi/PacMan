@@ -6,17 +6,18 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Interfaces.UbicableEnTablero;
+import Interfaces.EntidadRepresentable;
+import Utilidades.DuplaDoble;
 
-public class Pared implements UbicableEnTablero{
-    private double parUbicacion[];
+public class Pared implements EntidadRepresentable{
+    private DuplaDoble parUbicacion;
     private JLabel repGrafica;
     private ImageIcon imagen;
 
     public Pared(int x, int y){
-        parUbicacion = new double[2];
-        parUbicacion[0] = x;
-        parUbicacion[1]= y;
+        parUbicacion = new DuplaDoble();
+        parUbicacion.setX(x);
+        parUbicacion.setY(y);
     }
     
     public void CrearRepGrafica(int sizeCelda){
@@ -32,8 +33,12 @@ public class Pared implements UbicableEnTablero{
         return repGrafica;
     }
 
-    public double[] getUbicacion(){
+    public DuplaDoble getUbicacion(){
         return parUbicacion;
 
+    }
+
+    public boolean objetoSolido(){
+        return true;
     }
 }

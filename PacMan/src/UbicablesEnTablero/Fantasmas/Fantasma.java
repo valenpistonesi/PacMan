@@ -6,17 +6,19 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Interfaces.UbicableEnTablero;
+import Interfaces.EntidadConMovimiento;
+import Interfaces.EntidadRepresentable;
+import Utilidades.DuplaDoble;
 
-public abstract class Fantasma implements UbicableEnTablero{
-    private double parUbicacion[];
+public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimiento{
+    private DuplaDoble parUbicacion;
     private JLabel repGrafica;
     private ImageIcon imagen;
 
     public Fantasma(int x, int y){
-        parUbicacion = new double[2];
-        parUbicacion[0] = x;
-        parUbicacion[1]= y;
+        parUbicacion = new DuplaDoble();
+        parUbicacion.setX(x);
+        parUbicacion.setY(y);
     }
     
     public abstract void CrearRepGrafica(int sizeCelda);
@@ -25,9 +27,17 @@ public abstract class Fantasma implements UbicableEnTablero{
         return repGrafica;
     }
 
-    public double[] getUbicacion(){
+    public DuplaDoble getUbicacion(){
         return parUbicacion;
 
     }
+
+    public boolean objetoSolido(){
+        return false;
+
+    }
+
+
+
 }
 

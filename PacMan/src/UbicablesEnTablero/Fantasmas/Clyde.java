@@ -5,17 +5,16 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Interfaces.UbicableEnTablero;
+import Utilidades.CuadruplaBooleana;
+import Utilidades.DuplaDoble;
 
-public class Clyde implements UbicableEnTablero {
-    private double parUbicacion[];
+public class Clyde extends Fantasma {
+    private DuplaDoble parUbicacion;
     private JLabel repGrafica;
     private ImageIcon imagen;
 
     public Clyde(int x, int y){
-        parUbicacion = new double[2];
-        parUbicacion[0] = x;
-        parUbicacion[1]= y;
+        super(x, y);
     }
     
     public void CrearRepGrafica(int sizeCelda){
@@ -31,9 +30,21 @@ public class Clyde implements UbicableEnTablero {
         return repGrafica;
     }
 
-    public double[] getUbicacion(){
+    public DuplaDoble getUbicacion(){
         return parUbicacion;
 
+    }
+
+    @Override
+    public void actualizarPosicionGrafica() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
+    }
+
+    @Override
+    public void moverse(double c,CuadruplaBooleana i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'moverse'");
     }
     
 }

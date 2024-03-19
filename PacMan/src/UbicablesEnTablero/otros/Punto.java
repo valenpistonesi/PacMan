@@ -7,21 +7,21 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Interfaces.UbicableEnTablero;
+import Interfaces.EntidadRepresentable;
+import Utilidades.DuplaDoble;
 
-public class Punto implements UbicableEnTablero{
-    private double parUbicacion[];
+public class Punto implements EntidadRepresentable{
+    private DuplaDoble parUbicacion;
     private JLabel repGrafica;
     private ImageIcon imagen;
 
     public Punto(int x, int y){
-        parUbicacion = new double[2];
-        parUbicacion[0] = x;
-        parUbicacion[1]= y;
+        parUbicacion = new DuplaDoble();
+        parUbicacion.setX(x);
+        parUbicacion.setY(y);;
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        System.out.println("creacion de dot");
         imagen = new ImageIcon("src/assets/other/dot.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
@@ -34,8 +34,12 @@ public class Punto implements UbicableEnTablero{
         return repGrafica;
     }
 
-    public double[] getUbicacion(){
+    public DuplaDoble getUbicacion(){
         return parUbicacion;
 
+    }
+
+    public boolean objetoSolido(){
+        return false;
     }
 }

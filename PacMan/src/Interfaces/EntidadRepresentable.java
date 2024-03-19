@@ -2,13 +2,17 @@ package Interfaces;
 
 import javax.swing.JLabel;
 
-public interface UbicableEnTablero {
+import Utilidades.DuplaDoble;
+
+public interface EntidadRepresentable {
     
     public void CrearRepGrafica(int sizeCelda);
 
     public JLabel getRepGrafica();
 
-    public double[] getUbicacion();
+    public boolean objetoSolido();
+
+    public DuplaDoble getUbicacion();
     
 
     
