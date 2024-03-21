@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Interfaces.EntidadRepresentable;
+import UbicablesEnTablero.Jugador;
 import Utilidades.DuplaDoble;
 
 public class Pared implements EntidadRepresentable{
@@ -40,5 +41,10 @@ public class Pared implements EntidadRepresentable{
 
     public boolean objetoSolido(){
         return true;
+    }
+
+    @Override
+    public void colisionConJugador(Jugador j) {
+        System.out.println("no me deberia chocar una pared");
     }
 }

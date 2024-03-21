@@ -14,4 +14,8 @@ public class CuadruplaBooleana {
         return lados[i];
 
     }
+
+    public void print(){
+        System.out.println("lado derecho"+lados[0]+"lado abajo"+lados[1]+"lado izq"+lados[2]+"lado arriba"+lados[3]);
+    }
 }

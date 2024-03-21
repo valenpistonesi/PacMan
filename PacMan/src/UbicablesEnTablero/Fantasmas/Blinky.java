@@ -6,16 +6,21 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoAgresivo;
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoMiedo;
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.Contexto;
 import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Blinky extends Fantasma{
-    private DuplaDoble parUbicacion;
-    private JLabel repGrafica;
     private ImageIcon imagen;
+    private ComportamientoAgresivo comportamientoDefault;
+    private ComportamientoMiedo comportamientoPeligro;
 
     public Blinky(int x, int y){
-        super(x, y);;
+        super(x, y);
+        comportamientoDefault = new ComportamientoAgresivo();
+        contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
     
     public void CrearRepGrafica(int sizeCelda){
@@ -42,9 +47,8 @@ public class Blinky extends Fantasma{
         throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
     }
 
-    @Override
-    public void moverse(double v,CuadruplaBooleana i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moverse'");
-    }
+   
+
+    
 }
+

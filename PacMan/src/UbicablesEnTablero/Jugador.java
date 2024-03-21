@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import Interfaces.EntidadConMovimiento;
 import Interfaces.EntidadRepresentable;
+import Logica.ObserverJugador.ObservadorJugador;
 import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
@@ -18,6 +19,9 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
     JLabel repGrafica;
     ImageIcon[] imagen; 
     int animationCounter;
+    int tiempoRestanteAsustando;
+
+    private ObservadorJugador observer;
    
  
     public Jugador(double x, double y){
@@ -27,6 +31,11 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
         direccion = 0;
         imagen = new ImageIcon[12];
         animationCounter = 0;
+        tiempoRestanteAsustando=0;
+    }
+
+    public void setObserver(ObservadorJugador b){
+        observer = b;
     }
 
       
@@ -35,9 +44,15 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
            direccion = i;
         }
         else System.out.println("direccion erronea");
+        observer.notificarDireccion(i);
     }
 
     public void moverse(double velocidad, CuadruplaBooleana c){
+        if(tiempoRestanteAsustando> 0){
+            tiempoRestanteAsustando--;
+            if(tiempoRestanteAsustando== 1)
+                observer.notificacionEstadoPeligro(false);}
+
         double x = parUbicacion.getX();
         double y = parUbicacion.getY();
         switch(direccion){
@@ -72,14 +87,12 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
             parUbicacion.setX(x);
             parUbicacion.setY(y);
-            System.out.println(x+ " "+ y);
-
-
-
+            //System.out.println(x+ " "+ y);
         animationCounter++;    
         if(animationCounter>= 3){
             animationCounter= 0;
         }
+        observer.notificarUbicacion(parUbicacion);
 
     }
 
@@ -122,5 +135,23 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
     public boolean objetoSolido(){
         return false;
+    }
+
+    public void obtenerPuntos(int puntosParaElJugador) {
+        observer.notificarPuntosObtenidos(puntosParaElJugador);
+    }
+
+    public void perderVida() {
+        observer.notificarPerididaVida();
+    }
+
+    @Override
+    public void colisionConJugador(Jugador j) {
+        System.out.println("me choque solo!");
+    }
+
+    public void asustarFantasmas(int i) {
+        observer.notificacionEstadoPeligro(true);
+        tiempoRestanteAsustando= tiempoRestanteAsustando+i;
     }
 }

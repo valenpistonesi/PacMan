@@ -2,6 +2,7 @@ package Interfaces;
 
 import javax.swing.JLabel;
 
+import UbicablesEnTablero.Jugador;
 import Utilidades.DuplaDoble;
 
 public interface EntidadRepresentable {
@@ -13,6 +14,8 @@ public interface EntidadRepresentable {
     public boolean objetoSolido();
 
     public DuplaDoble getUbicacion();
+
+    public void colisionConJugador(Jugador j);
     
 
     

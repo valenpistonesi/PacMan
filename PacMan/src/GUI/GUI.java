@@ -78,15 +78,13 @@ public class GUI extends JFrame {
                 if(e!= null){
                     if(e.getRepGrafica()!= null){}
                         e.CrearRepGrafica(SIZE_CELDA);
-                        tablero.removerDelTablero(i, j);
-                        //System.out.println("creado  "+convertirValorX(i)+"   "+convertirValorY(j));
                         e.getRepGrafica().setLocation(convertirValorX(i),convertirValorY(j));
                         panelPrinc.add(e.getRepGrafica());}
 
             }
         }
+        tablero.removerEntidadesMobilesDeTablero();
         repaint();
-        //entidadesMoviles =tablero.obtenerEntidadesMobiles();
     }
 
     //convierte un valor de x del tablero a ubicacion en la gui

@@ -5,16 +5,25 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoAgresivo;
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoMiedo;
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoPerdido;
 import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Clyde extends Fantasma {
-    private DuplaDoble parUbicacion;
-    private JLabel repGrafica;
     private ImageIcon imagen;
+    private ComportamientoPerdido comportamientoDefault;
+    private ComportamientoMiedo comportamientoPeligro;
+    private ComportamientoAgresivo comportamientoAtaque;
+    private int DISTANCIA_AGRESION = 3;
 
     public Clyde(int x, int y){
         super(x, y);
+        comportamientoDefault = new ComportamientoPerdido();
+        comportamientoAtaque=new ComportamientoAgresivo();
+        comportamientoPeligro = new ComportamientoMiedo();
+        contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
     
     public void CrearRepGrafica(int sizeCelda){
@@ -41,10 +50,16 @@ public class Clyde extends Fantasma {
         throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
     }
 
+
     @Override
-    public void moverse(double c,CuadruplaBooleana i) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moverse'");
+    public void notificacionUbicacion(DuplaDoble d) {
+        super.notificacionUbicacion(d);
+        double dx = parUbicacion.getX() -d.getX();
+        double dy = parUbicacion.getY() -d.getY();
+        double distancia = Math.sqrt(dx*dx + dy*dy);
+        if(distancia < DISTANCIA_AGRESION)
+           contenerdorComportamiento.setComportamiento(comportamientoAtaque);
+        else contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
     
 }

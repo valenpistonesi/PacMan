@@ -8,21 +8,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Interfaces.EntidadRepresentable;
+import UbicablesEnTablero.Jugador;
 import Utilidades.DuplaDoble;
 
 public class Punto implements EntidadRepresentable{
-    private DuplaDoble parUbicacion;
-    private JLabel repGrafica;
-    private ImageIcon imagen;
+    protected DuplaDoble parUbicacion;
+    protected JLabel repGrafica;
+    protected ImageIcon imagen;
+    protected int puntos;
 
     public Punto(int x, int y){
         parUbicacion = new DuplaDoble();
         parUbicacion.setX(x);
-        parUbicacion.setY(y);;
+        parUbicacion.setY(y);
+        puntos = 100;
+        imagen = new ImageIcon("src/assets/other/dot.png");
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("src/assets/other/dot.png");
+        
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);
@@ -41,5 +45,11 @@ public class Punto implements EntidadRepresentable{
 
     public boolean objetoSolido(){
         return false;
+    }
+
+    @Override
+    public void colisionConJugador(Jugador j) {
+        j.obtenerPuntos(puntos);
+        repGrafica.setIcon(null);
     }
 }

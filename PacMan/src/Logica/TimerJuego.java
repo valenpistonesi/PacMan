@@ -10,7 +10,7 @@ class TimerJuego extends Thread {
     public TimerJuego(GUI g, Tablero t) {
         this.graficos = g;
         this.tablero = t;
-        tiempo = 500;
+        tiempo = 100;
     }
 
     public void setTiempo(int tiempo) {
@@ -21,7 +21,6 @@ class TimerJuego extends Thread {
     public void run() {
         while (true) {
             try {
-                System.out.println("no paro de mandar mensajes soy re denso");
                 tablero.moverEntidades();
                 graficos.actualizarPosiciones();
 

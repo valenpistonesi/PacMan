@@ -46,6 +46,7 @@ public class LectorDeNiveles {
                                 case 's' :tablero.agregarStrawberry(x,y);break;
                                 case '.': tablero.agregarPunto(x,y);break;
                                 //case 'o': tablero.agregarPuntoGrande(x,y); break;
+                                default:{}
                             }
                             x++;
                         }
