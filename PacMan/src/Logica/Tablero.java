@@ -36,18 +36,39 @@ public class Tablero{
     }
 
     public void moverEntidades(){
+        moverJugador();
         Iterator<EntidadConMovimiento> it =  entidadesMobiles.iterator();
         EntidadConMovimiento e;
         DuplaDoble dup;
         CuadruplaBooleana c;
+        int xpac =(int) Math.round(pacMan.getUbicacion().getX());
+        int ypac =(int) Math.round(pacMan.getUbicacion().getY());
+        it.next();
+
         while(it.hasNext()){
             e = it.next();
             dup = e.getUbicacion();
             c = ObtenerContexto((int)Math.round(dup.getX()),(int)Math.round(dup.getY()));
-            //c.print();
+            if(xpac == (int)Math.round(dup.getX()) && ypac == (int) Math.round(dup.getY())){
+                System.out.println("COLISION CON ENTIDAD");
+                e.colisionConJugador(pacMan);
+            }
             e.moverse(VELOCIDAD_JUEGO, c);
         }
         //control de colisiones
+    }
+    private void moverJugador(){
+        DuplaDoble dup = pacMan.getUbicacion();
+        CuadruplaBooleana c = ObtenerContexto((int)Math.round(dup.getX()),(int)Math.round(dup.getY()));
+        pacMan.moverse(VELOCIDAD_JUEGO, c);
+        dup = pacMan.getUbicacion();
+        int x =(int)Math.round(dup.getX());
+        int y =(int)Math.round(dup.getY());
+        if(tablero[x][y] != null){
+            tablero[x][y].colisionConJugador(pacMan);
+            removerDelTablero(x, y);
+        }
+
     }
 
     public CuadruplaBooleana ObtenerContexto(int x, int y){  
@@ -121,8 +142,7 @@ public class Tablero{
         observerJugador.suscribirseUbicacion((SuscriptorUbicacionEstado)tablero[x][y]);}
 
     public void agregarStrawberry(int x, int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'agregarStrawberry'");
+       tablero[x][y] = new Frutilla(x, y);
     }
 
     public void agregarProtagonista(int x, int y) {
@@ -155,5 +175,12 @@ public class Tablero{
 
 
         }
+    }
+    public Jugador returnJugador(){
+        return pacMan;
+    }
+
+    public void agregarManzana(int x, int y) {
+        tablero[x][y] = new Manzana(x, y);
     }
 }

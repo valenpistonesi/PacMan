@@ -2,6 +2,7 @@ package Interfaces;
 
 import javax.swing.JLabel;
 
+import UbicablesEnTablero.Jugador;
 import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
@@ -14,6 +15,8 @@ public interface EntidadConMovimiento {
     public DuplaDoble getUbicacion();
 
     public JLabel getRepGrafica();
+
+    public void colisionConJugador(Jugador j);
 
 
     

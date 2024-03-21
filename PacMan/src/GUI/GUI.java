@@ -64,6 +64,7 @@ public class GUI extends JFrame {
             ecm = it.next();
             DuplaDoble ubi =ecm.getUbicacion();
             ecm.getRepGrafica().setLocation(convertirValorX(ubi.getX()),convertirValorY(ubi.getY()));
+            
         }
 
 

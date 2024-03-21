@@ -47,13 +47,11 @@ public class ObservadorJugador {
     }
 
     public void notificarPerididaVida() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notificarPerididaVida'");
+        
     }
 
     public void notificarPuntosObtenidos(int puntosParaElJugador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notificarPuntosObtenidos'");
+       
     }
 
 

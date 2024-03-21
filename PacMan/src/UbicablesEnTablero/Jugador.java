@@ -85,8 +85,8 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
             }    
             break; }
 
-            parUbicacion.setX(x);
-            parUbicacion.setY(y);
+        parUbicacion.setX(x);
+        parUbicacion.setY(y);
             //System.out.println(x+ " "+ y);
         animationCounter++;    
         if(animationCounter>= 3){

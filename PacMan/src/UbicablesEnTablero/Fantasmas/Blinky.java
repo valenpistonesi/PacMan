@@ -13,9 +13,6 @@ import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Blinky extends Fantasma{
-    private ImageIcon imagen;
-    private ComportamientoAgresivo comportamientoDefault;
-    private ComportamientoMiedo comportamientoPeligro;
 
     public Blinky(int x, int y){
         super(x, y);

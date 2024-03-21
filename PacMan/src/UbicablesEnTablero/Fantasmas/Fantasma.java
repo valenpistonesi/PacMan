@@ -10,6 +10,7 @@ import Interfaces.EntidadConMovimiento;
 import Interfaces.EntidadRepresentable;
 import Interfaces.SuscriptorUbicacionEstado;
 import UbicablesEnTablero.Jugador;
+import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoAgresivo;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoMiedo;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.Contexto;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.InterfazComportamiento;
@@ -18,20 +19,25 @@ import Utilidades.DuplaDoble;
 
 public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimiento,SuscriptorUbicacionEstado{
     protected DuplaDoble parUbicacion;
-    protected JLabel repGrafica;
-    protected ImageIcon imagen;
+    protected JLabel repGrafica; 
     protected double multiplicadorDeVelocidad = 0.3;
-    protected DuplaDoble pacmanUbicacion;
-    protected int pacmanDireccion;
-    protected Contexto contenerdorComportamiento;
-    protected boolean volverABase;
     protected DuplaDoble ubicacionBase;
-    protected ComportamientoMiedo comportamientoPeligro;
-    protected InterfazComportamiento comportamientoDefault;
+    protected int puntosParaElJugador; 
+
+    protected ImageIcon imagen;
     protected ImageIcon ojos;
     protected ImageIcon miedo;
+   
+    protected DuplaDoble pacmanUbicacion;
+    protected int pacmanDireccion;
+
+    protected Contexto contenerdorComportamiento;
+    protected ComportamientoMiedo comportamientoPeligro;
+    protected InterfazComportamiento comportamientoDefault;
+    protected ComportamientoAgresivo comportamientoAtaque;
+
     protected boolean escapandoDeJugador;
-    protected int puntosParaElJugador;
+    protected boolean volverABase;
 
 
     public Fantasma(int x, int y){
@@ -41,6 +47,9 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         parUbicacion.setX(x);
         parUbicacion.setY(y);
         contenerdorComportamiento = new Contexto();
+        comportamientoAtaque= new ComportamientoAgresivo();
+        comportamientoPeligro = new ComportamientoMiedo();
+        volverABase = false;
         ojos = new ImageIcon("src/assets/ghosts/ojosdefantasma.png");
         miedo = new ImageIcon("src/assets/ghosts/blueghost.png");
     }
@@ -77,30 +86,32 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         double y = parUbicacion.getY();
         switch(direccion){
             case 0:{ 
-                x=x + velocidad*multiplicadorDeVelocidad;//DERECHA
+                x=x + velocidad;//DERECHA
                 y = Math.round(y);
             }
             break;
             case 1:{  
-                 y = y + velocidad*multiplicadorDeVelocidad;//ABAJO
+                 y = y + velocidad;//ABAJO
                  x = Math.round(x);
             }
             break;
             case 2:{
-                x =x - velocidad*multiplicadorDeVelocidad;//IZQUIERDA
+                x =x - velocidad;//IZQUIERDA
                 y = Math.round(y);
             }
             break;
             case 3:{
                 x = Math.round(x);
-                y = y - velocidad*multiplicadorDeVelocidad;//ARRIBA
+                y = y - velocidad;//ARRIBA
             }    
             break; }
         parUbicacion.setX(x);
         parUbicacion.setY(y);
 
         if(Math.round(parUbicacion.getX()) ==Math.round(ubicacionBase.getX()) && Math.round(parUbicacion.getY()) ==Math.round(ubicacionBase.getY())){
-           volverABase=false;     
+           System.out.println("VOLVI A BASEEEEE");
+           volverABase=false;  
+           escapandoDeJugador = false;   
            repGrafica.setIcon(imagen); }
 
     }
@@ -158,10 +169,12 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
             if(escapandoDeJugador){
                 volverABase = true;
                 repGrafica.setIcon(ojos);
+                contenerdorComportamiento.setComportamiento(comportamientoAtaque);
                 j.obtenerPuntos(puntosParaElJugador);
             }
             else{
                 volverABase = true;
+                contenerdorComportamiento.setComportamiento(comportamientoAtaque);
                 repGrafica.setIcon(ojos);
                 j.perderVida();
             }

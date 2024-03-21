@@ -13,10 +13,6 @@ import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Pinky extends Fantasma {
-    private ImageIcon imagen;
-    private ComportamientoPredictivo comportamientoDefault;
-    private ComportamientoMiedo comportamientoPeligro;
-    private ComportamientoAgresivo comportamientoAtaque;
     private int DISTANCIA_AGRESION = 3;
 
     public Pinky(int x, int y){
@@ -57,8 +53,9 @@ public class Pinky extends Fantasma {
         double dx = parUbicacion.getX() -d.getX();
         double dy = parUbicacion.getY() -d.getY();
         double distancia = Math.sqrt(dx*dx + dy*dy);
-        if(distancia < DISTANCIA_AGRESION)
-           contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-        else contenerdorComportamiento.setComportamiento(comportamientoDefault);
+        if(!volverABase && !escapandoDeJugador)
+            if(distancia < DISTANCIA_AGRESION)
+            contenerdorComportamiento.setComportamiento(comportamientoAtaque);
+            else contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
 }

@@ -13,8 +13,9 @@ public class Manzana extends Punto {
     }
 
     public void colisionConJugador(Jugador j){
+        System.out.println("COLISION MANSAAAAANAAAAA");
         super.colisionConJugador(j);
-        j.asustarFantasmas(30);
+        j.asustarFantasmas(3000);
     }
     
 }

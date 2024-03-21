@@ -13,10 +13,6 @@ import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Inky extends Fantasma{
-    private ImageIcon imagen;
-    private ComportamientoEmboscada comportamientoDefault;
-    private ComportamientoMiedo comportamientoPeligro;
-    private ComportamientoAgresivo comportamientoAtaque;
     private int DISTANCIA_AGRESION = 3;
 
     public Inky(int x, int y){
@@ -25,10 +21,10 @@ public class Inky extends Fantasma{
         contenerdorComportamiento.setComportamiento(comportamientoDefault);
         comportamientoAtaque=new ComportamientoAgresivo();
         comportamientoPeligro = new ComportamientoMiedo();
+        imagen = new ImageIcon("src/assets/ghosts/inky.png");
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("src/assets/ghosts/inky.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);
@@ -58,11 +54,9 @@ public class Inky extends Fantasma{
         double dx = parUbicacion.getX() -d.getX();
         double dy = parUbicacion.getY() -d.getY();
         double distancia = Math.sqrt(dx*dx + dy*dy);
-        if(volverABase == true){
+        if(!volverABase && !escapandoDeJugador)
+            if(distancia < DISTANCIA_AGRESION)
             contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-        }
-        if(distancia < DISTANCIA_AGRESION)
-           contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-        else contenerdorComportamiento.setComportamiento(comportamientoDefault);
+            else contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
 }
