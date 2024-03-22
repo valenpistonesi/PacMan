@@ -22,10 +22,12 @@ public class Tablero{
     private LectorDeTeclado lectorTeclado;
     private EntidadRepresentable [][] tablero;
     private LinkedList <EntidadConMovimiento> entidadesMobiles;
-    private EstadoDeJuego estado;
     private LectorDeNiveles lectorNiveles;
     private Jugador pacMan;
     private ObservadorJugador observerJugador;
+    private EstadoDeJuego estado;
+
+    private int cantDeObjetivos;
 
     public Tablero(){
         tablero = new EntidadRepresentable[SIZE_TABLERO][SIZE_TABLERO];
@@ -33,6 +35,11 @@ public class Tablero{
         entidadesMobiles =new LinkedList<EntidadConMovimiento>(); 
         lectorTeclado = new LectorDeTeclado();
         observerJugador = new ObservadorJugador();
+    }
+
+    public void agregarEstado(EstadoDeJuego estado){
+        observerJugador.suscribirsePuntaje(estado);
+        this.estado = estado;
     }
 
     public void moverEntidades(){
@@ -50,7 +57,6 @@ public class Tablero{
             dup = e.getUbicacion();
             c = ObtenerContexto((int)Math.round(dup.getX()),(int)Math.round(dup.getY()));
             if(xpac == (int)Math.round(dup.getX()) && ypac == (int) Math.round(dup.getY())){
-                System.out.println("COLISION CON ENTIDAD");
                 e.colisionConJugador(pacMan);
             }
             e.moverse(VELOCIDAD_JUEGO, c);
@@ -102,12 +108,15 @@ public class Tablero{
     }
 
     public void LimpiarTablero(){
-        //eliminar la tabla, sacar elementos de gui y poder empezar de cero
+        tablero = new EntidadRepresentable[SIZE_TABLERO][SIZE_TABLERO];
+        entidadesMobiles.clear();
     }
 
 
     public void cargarTablero(int i){
+        cantDeObjetivos = 0;
         lectorNiveles.readFile(i);
+        estado.estadoInicial(cantDeObjetivos);
     }
 
     public LinkedList<EntidadConMovimiento> obtenerEntidadesMobiles() {
@@ -119,6 +128,7 @@ public class Tablero{
     }
     public void agregarPunto(int x, int y){
         tablero[x][y] = new Punto(x,y);
+        cantDeObjetivos++;
     }
 
     public void agregarBlinky(int x, int y) {
@@ -143,6 +153,7 @@ public class Tablero{
 
     public void agregarStrawberry(int x, int y) {
        tablero[x][y] = new Frutilla(x, y);
+       cantDeObjetivos ++;
     }
 
     public void agregarProtagonista(int x, int y) {
@@ -182,5 +193,7 @@ public class Tablero{
 
     public void agregarManzana(int x, int y) {
         tablero[x][y] = new Manzana(x, y);
+        cantDeObjetivos ++;
     }
+
 }

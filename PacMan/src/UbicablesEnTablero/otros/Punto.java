@@ -50,6 +50,7 @@ public class Punto implements EntidadRepresentable{
     @Override
     public void colisionConJugador(Jugador j) {
         j.obtenerPuntos(puntos);
+        j.disminuirCantObjetivos();
         repGrafica.setIcon(null);
     }
 }

@@ -54,9 +54,9 @@ public class Inky extends Fantasma{
         double dx = parUbicacion.getX() -d.getX();
         double dy = parUbicacion.getY() -d.getY();
         double distancia = Math.sqrt(dx*dx + dy*dy);
-        if(!volverABase && !escapandoDeJugador)
+        if(!volverABase && !escapandoDeJugador){
             if(distancia < DISTANCIA_AGRESION)
             contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-            else contenerdorComportamiento.setComportamiento(comportamientoDefault);
+            else contenerdorComportamiento.setComportamiento(comportamientoDefault);}
     }
 }

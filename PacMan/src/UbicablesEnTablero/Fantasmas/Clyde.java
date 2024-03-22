@@ -90,7 +90,6 @@ public class Clyde extends Fantasma {
 
                 parUbicacion.setX(x);
                 parUbicacion.setY(y);
-                System.out.println(x+ " "+ y);
         }
     }
 

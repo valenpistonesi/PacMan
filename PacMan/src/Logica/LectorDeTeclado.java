@@ -14,25 +14,20 @@ public class LectorDeTeclado implements KeyListener{
         }
     
     public void FlechaDireccional(KeyEvent e){
-        System.out.println("flecha direccional");
         int tecla = e.getKeyCode();
         if(tecla == KeyEvent.VK_LEFT){
-            System.out.println("IZQUIERDA");
             pacMan.direccionar(2);
 
         }
         if(tecla == KeyEvent.VK_RIGHT){
-            System.out.println("DERECHA");
             pacMan.direccionar(0);
 
         }
         if(tecla == KeyEvent.VK_UP){
-            System.out.println("ARRIBA");
             pacMan.direccionar(3);
 
         }
         if(tecla == KeyEvent.VK_DOWN){
-            System.out.println("ABAJO");
             pacMan.direccionar(1);
 
         }

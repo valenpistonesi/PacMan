@@ -19,5 +19,6 @@ public interface EntidadConMovimiento {
     public void colisionConJugador(Jugador j);
 
 
+
     
 }

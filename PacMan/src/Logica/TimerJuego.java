@@ -6,6 +6,7 @@ class TimerJuego extends Thread {
     private int tiempo;
     private GUI graficos;
     private Tablero tablero;
+    private boolean juegoContinua;
 
     public TimerJuego(GUI g, Tablero t) {
         this.graficos = g;
@@ -19,7 +20,8 @@ class TimerJuego extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        juegoContinua = true;
+        while (juegoContinua) {
             try {
                 tablero.moverEntidades();
                 graficos.actualizarPosiciones();
@@ -30,5 +32,10 @@ class TimerJuego extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void detenerJuego(){
+        juegoContinua = false;
+
     }
 }

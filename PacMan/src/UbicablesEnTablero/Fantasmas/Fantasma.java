@@ -20,7 +20,7 @@ import Utilidades.DuplaDoble;
 public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimiento,SuscriptorUbicacionEstado{
     protected DuplaDoble parUbicacion;
     protected JLabel repGrafica; 
-    protected double multiplicadorDeVelocidad = 0.3;
+    protected double multiplicadorDeVelocidad = 0.2;
     protected DuplaDoble ubicacionBase;
     protected int puntosParaElJugador; 
 
@@ -109,7 +109,6 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         parUbicacion.setY(y);
 
         if(Math.round(parUbicacion.getX()) ==Math.round(ubicacionBase.getX()) && Math.round(parUbicacion.getY()) ==Math.round(ubicacionBase.getY())){
-           System.out.println("VOLVI A BASEEEEE");
            volverABase=false;  
            escapandoDeJugador = false;   
            repGrafica.setIcon(imagen); }
@@ -160,24 +159,26 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
 
                 parUbicacion.setX(x);
                 parUbicacion.setY(y);
-                System.out.println(x+ " "+ y);
         }
     }
 
     public void colisionConJugador(Jugador j){
+       
         if(!volverABase){
+                System.out.println("colision sin volver a base");
+                volverABase = true;
+                escapandoDeJugador =false;
             if(escapandoDeJugador){
-                volverABase = true;
+                System.out.println("escapando de jugador");
                 repGrafica.setIcon(ojos);
                 contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-                j.obtenerPuntos(puntosParaElJugador);
-            }
-            else{
-                volverABase = true;
-                contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-                repGrafica.setIcon(ojos);
-                j.perderVida();
-            }
+                j.obtenerPuntos(puntosParaElJugador);}
+                else{
+                    System.out.println("NO escapando de jugador");
+                    contenerdorComportamiento.setComportamiento(comportamientoAtaque);
+                    repGrafica.setIcon(ojos);
+                    j.perderVida();
+                }
         }
     }
 

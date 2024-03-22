@@ -12,7 +12,7 @@ import Utilidades.DuplaDoble;
 import java.awt.Dimension;
 
 public class Jugador implements EntidadRepresentable, EntidadConMovimiento { 
-    private final double multiplicadorDeVelocidad = 0.5;
+    private final double multiplicadorDeVelocidad = 0.49;
 
     private int direccion;
     private DuplaDoble parUbicacion;
@@ -87,7 +87,6 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
         parUbicacion.setX(x);
         parUbicacion.setY(y);
-            //System.out.println(x+ " "+ y);
         animationCounter++;    
         if(animationCounter>= 3){
             animationCounter= 0;
@@ -124,7 +123,6 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
     @Override
     public JLabel getRepGrafica() {
-        System.out.println("repGrafica");
         return repGrafica;
     }
 
@@ -139,6 +137,10 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
     public void obtenerPuntos(int puntosParaElJugador) {
         observer.notificarPuntosObtenidos(puntosParaElJugador);
+    }
+
+    public void disminuirCantObjetivos(){
+        observer.notificarObjetivoCumplido();
     }
 
     public void perderVida() {

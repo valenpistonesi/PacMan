@@ -47,11 +47,25 @@ public class ObservadorJugador {
     }
 
     public void notificarPerididaVida() {
+        Iterator<SuscriptorPuntaje> it = suscriptosPuntaje.iterator();
+        while (it.hasNext()){
+            it.next().notificacionPerdidaDeVida();
+        }
+
         
+    }
+    public void notificarObjetivoCumplido() {
+        Iterator<SuscriptorPuntaje> it = suscriptosPuntaje.iterator();
+        while (it.hasNext()){
+            it.next().notificacionDisminucionCantDeObjetivos();
+        }
     }
 
     public void notificarPuntosObtenidos(int puntosParaElJugador) {
-       
+        Iterator<SuscriptorPuntaje> it = suscriptosPuntaje.iterator();
+        while (it.hasNext()){
+            it.next().notificacionPuntaje(puntosParaElJugador);
+        }
     }
 
 
