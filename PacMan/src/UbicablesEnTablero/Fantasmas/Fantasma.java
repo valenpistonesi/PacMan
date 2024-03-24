@@ -1,7 +1,6 @@
 package UbicablesEnTablero.Fantasmas;
 
-import java.awt.Color;
-import java.awt.Dimension;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -111,7 +110,8 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         if(Math.round(parUbicacion.getX()) ==Math.round(ubicacionBase.getX()) && Math.round(parUbicacion.getY()) ==Math.round(ubicacionBase.getY())){
            volverABase=false;  
            escapandoDeJugador = false;   
-           repGrafica.setIcon(imagen); }
+           repGrafica.setIcon(imagen);
+           contenerdorComportamiento.setComportamiento(comportamientoDefault);}
 
     }
 
@@ -165,20 +165,16 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
     public void colisionConJugador(Jugador j){
        
         if(!volverABase){
-                System.out.println("colision sin volver a base");
                 volverABase = true;
-                escapandoDeJugador =false;
             if(escapandoDeJugador){
-                System.out.println("escapando de jugador");
                 repGrafica.setIcon(ojos);
                 contenerdorComportamiento.setComportamiento(comportamientoAtaque);
                 j.obtenerPuntos(puntosParaElJugador);}
-                else{
-                    System.out.println("NO escapando de jugador");
-                    contenerdorComportamiento.setComportamiento(comportamientoAtaque);
-                    repGrafica.setIcon(ojos);
-                    j.perderVida();
-                }
+            else{ 
+                contenerdorComportamiento.setComportamiento(comportamientoAtaque);
+                repGrafica.setIcon(ojos);
+                j.perderVida();
+            }
         }
     }
 

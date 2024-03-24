@@ -2,15 +2,17 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -28,12 +30,13 @@ public class GUI extends JFrame {
 
     private Tablero tablero;
     private int cantCeldasTablero;
-    private LinkedList<EntidadConMovimiento> entidadesMoviles;
-
 
 
     private PanelBase panelPrinc;
     private PanelVidas panelStats;
+    private LectorDeTextos lectorScores;
+
+    private ReproductorDeSonidos reproductorSonidos;
 
 
     public GUI(Tablero t){
@@ -55,10 +58,20 @@ public class GUI extends JFrame {
         panelPrinc = new PanelBase(cantCeldasTablero);
         this.getContentPane().add(panelPrinc);
         this.addKeyListener(tablero.getLectorDeTeclado());
+        lectorScores = new LectorDeTextos();
+        reproductorSonidos = new ReproductorDeSonidos();
+
+        
         
     }
 
-    public void mostrarMensajeDerrota(){}
+    public void mostrarMensajeDerrota(int i){
+        reproductorSonidos.reproducir(reproductorSonidos.getClipMuriendo());
+        JOptionPane.showMessageDialog(this, "perdiste sos malaso", getTitle(), 1);
+        String nombre =JOptionPane.showInputDialog(null,"Ingresa tu nombre");
+        LectorDeTextos.agregarPuntaje(nombre, i);
+        JOptionPane.showMessageDialog(this,"Puntajes mas altos:\n"+lectorScores.obtenerPuntajes(),getTitle(),1);
+    }
 
     public void actualizarPosiciones(){
         LinkedList<EntidadConMovimiento> lista =tablero.obtenerEntidadesMobiles();
@@ -87,6 +100,7 @@ public class GUI extends JFrame {
         }
         tablero.removerEntidadesMobilesDeTablero();
         repaint();
+        reproductorSonidos.reproducir(reproductorSonidos.getClipInicio());
     }
 
     public void limpiarGui(){
@@ -137,6 +151,7 @@ public class GUI extends JFrame {
 
     public void setScore(int s){
         panelStats.setScore(s);
+        reproductorSonidos.reproducir(reproductorSonidos.getClipComiendo());
     }
 
     public class PanelVidas extends JPanel {
@@ -197,8 +212,51 @@ public class GUI extends JFrame {
 
     }
 
-	public void mostrarMensajeVictoria() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'mostrarMensajeVictoria'");
-	}
+	public void mostrarMensajeVictoria(int i) {
+        JOptionPane.showMessageDialog(this, "ganaste buenisimo", getTitle(), 1);
+        String nombre =JOptionPane.showInputDialog(null,"Ingresa tu nombre");
+        LectorDeTextos.agregarPuntaje(nombre, i);
+        JOptionPane.showMessageDialog(this,"Puntajes mas altos:\n"+lectorScores.obtenerPuntajes(),getTitle(),1);
+    }
+
+    class ReproductorDeSonidos{
+        private Clip pacManComiendo;
+        private Clip pacManMuriendo;
+        private Clip inicioDelJuego;
+
+        public ReproductorDeSonidos(){
+            AudioInputStream audioInput;
+            try {
+                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmchomp.wav"));
+                pacManComiendo = AudioSystem.getClip();
+                pacManComiendo.open(audioInput);
+                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmdeath.wav"));
+                pacManMuriendo = AudioSystem.getClip();
+                pacManMuriendo.open(audioInput);
+                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmringtone.wav"));
+                inicioDelJuego = AudioSystem.getClip();
+                inicioDelJuego.open(audioInput);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void reproducir(Clip c){
+            if(c!= null&& !c.isRunning()){
+                c.setFramePosition(0);
+                c.start();
+            }
+        }
+
+        public Clip getClipComiendo(){
+            return pacManComiendo;
+        }
+
+        public Clip getClipMuriendo(){
+            return pacManMuriendo;
+        }
+        public Clip getClipInicio(){
+            return inicioDelJuego;
+        }
+    }
 }

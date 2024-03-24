@@ -7,9 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoAgresivo;
-import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoMiedo;
-import UbicablesEnTablero.Fantasmas.SrategyComportamiento.Contexto;
-import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Blinky extends Fantasma{
@@ -36,12 +33,6 @@ public class Blinky extends Fantasma{
     public DuplaDoble getUbicacion(){
         return parUbicacion;
 
-    }
-
-    @Override
-    public void actualizarPosicionGrafica() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
     }
 
    

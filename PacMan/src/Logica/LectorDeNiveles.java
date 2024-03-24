@@ -21,13 +21,10 @@ public class LectorDeNiveles {
             char letraActual;
             int x = 0;
             int y = 0;
-            String palabra = b.readLine();
-            System.out.println(palabra);    
-            //while ( (palabra = b.readLine()) != null&&palabra != "Layout:") {}
+            String palabra = b.readLine();    
             if(true){
                 //System.out.println("SE ENTRO EN EL IF");
                 int sizeTablero = Integer.parseInt(b.readLine());
-                System.out.println(sizeTablero);
                 while(y<sizeTablero){
                     x = 0;
                     palabra =b.readLine();

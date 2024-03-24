@@ -96,12 +96,6 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
     }
 
     @Override
-    public void actualizarPosicionGrafica() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
-    }
-
-    @Override
     public void CrearRepGrafica(int sizeCelda) {
         for (int i = 0; i<3; i++){   
             imagen[i] = new ImageIcon("src/assets/PacMan/right/"+(i+1)+".png");

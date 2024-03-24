@@ -1,7 +1,5 @@
 package Interfaces;
 
-import Utilidades.DuplaDoble;
-
 public interface SuscriptorPuntaje {
     public void notificacionDisminucionCantDeObjetivos();
     public void notificacionPuntaje(int puntos);

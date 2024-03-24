@@ -117,6 +117,7 @@ public class Tablero{
         cantDeObjetivos = 0;
         lectorNiveles.readFile(i);
         estado.estadoInicial(cantDeObjetivos);
+        cantDeObjetivos = 0;
     }
 
     public LinkedList<EntidadConMovimiento> obtenerEntidadesMobiles() {
@@ -179,7 +180,6 @@ public class Tablero{
     public void removerEntidadesMobilesDeTablero(){
         Iterator<EntidadConMovimiento> it =  entidadesMobiles.iterator();
         EntidadConMovimiento e;
-        DuplaDoble dup;
         while(it.hasNext()){
             e = it.next();
             removerDelTablero((int)Math.round(e.getUbicacion().getX()),(int)Math.round(e.getUbicacion().getY()));

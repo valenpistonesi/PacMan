@@ -18,7 +18,7 @@ public class PacMan {
         //ejecucion----------------
         int maxLevel = tablero.getMaxLevel();
         int levelActual = 1;
-        while(estado.getPasarDeNivel()&& levelActual <= maxLevel){
+        while(levelActual <= maxLevel){
             tablero.cargarTablero(levelActual);
             gui.agregarElementosGUI();
 
@@ -26,17 +26,16 @@ public class PacMan {
             
             gui.limpiarGui();
             tablero.LimpiarTablero();
-            
 
-
+            if(estado.getPasarDeNivel())
+                levelActual++;
+            else {
+                levelActual = 1;
+                estado.reiniciarPuntaje();}
         }
 
         if(estado.getPasarDeNivel())
-            gui.mostrarMensajeVictoria();
+            gui.mostrarMensajeVictoria(estado.getPuntaje());
         System.out.println("fin del codigo");
-    }
-
-    public void cicloDeJuego(){
-        
     }
 }

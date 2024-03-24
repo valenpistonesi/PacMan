@@ -34,7 +34,7 @@ public class ComportamientoAgresivo implements InterfazComportamiento{
         }
         else{//dy es mayor
             if(dy >= 0){
-                dir[0] = 3;
+                dir[0] = 3; 
                 if(dx>= 0){
                     dir[1] = 2;
                     dir[2] = 0;}

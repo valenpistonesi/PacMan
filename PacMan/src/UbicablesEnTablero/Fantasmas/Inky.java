@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoAgresivo;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoEmboscada;
 import UbicablesEnTablero.Fantasmas.SrategyComportamiento.ComportamientoMiedo;
-import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 public class Inky extends Fantasma{
@@ -39,12 +38,6 @@ public class Inky extends Fantasma{
     public DuplaDoble getUbicacion(){
         return parUbicacion;
 
-    }
-
-    @Override
-    public void actualizarPosicionGrafica() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
     }
 
 

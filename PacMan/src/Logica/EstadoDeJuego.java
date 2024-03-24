@@ -1,7 +1,5 @@
 package Logica;
 
-import java.awt.Panel;
-
 import GUI.GUI;
 import Interfaces.SuscriptorPuntaje;
 
@@ -35,7 +33,7 @@ public class EstadoDeJuego implements SuscriptorPuntaje{
 
     @Override
     public void notificacionPuntaje(int puntos) {
-        puntaje += puntos;
+        puntaje += Math.abs(puntos - Math.round(puntos*timer.getTiempo()*0.001));
         PanelEstado.setScore(puntaje);
     }
 
@@ -46,7 +44,7 @@ public class EstadoDeJuego implements SuscriptorPuntaje{
         if(cantDeVidas == 0){
             pasarDeNivelalCompletarObjetivos = false;
             timer.detenerJuego();
-            PanelEstado.mostrarMensajeDerrota();
+            PanelEstado.mostrarMensajeDerrota(puntaje);
         }
     }
 
@@ -56,6 +54,13 @@ public class EstadoDeJuego implements SuscriptorPuntaje{
 
     public boolean getPasarDeNivel() {
         return pasarDeNivelalCompletarObjetivos;
+    }
+
+	public void reiniciarPuntaje() {
+		puntaje = 0;}
+
+    public int getPuntaje(){
+        return puntaje;
     }
 
 }

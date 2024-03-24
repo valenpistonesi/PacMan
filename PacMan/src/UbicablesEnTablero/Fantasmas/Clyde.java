@@ -15,6 +15,7 @@ public class Clyde extends Fantasma {
     private int DISTANCIA_AGRESION = 3;
     private int tiempoParaAleatorizarMovimiento;
     private int[] direccionesActuales;
+    private final int DISTANCIA_SEPARACION_MAXIMA = 10;
 
     public Clyde(int x, int y){
         super(x, y);
@@ -94,20 +95,13 @@ public class Clyde extends Fantasma {
     }
 
     @Override
-    public void actualizarPosicionGrafica() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarPosicionGrafica'");
-    }
-
-
-    @Override
     public void notificacionUbicacion(DuplaDoble d) {
         super.notificacionUbicacion(d);
         double dx = parUbicacion.getX() -d.getX();
         double dy = parUbicacion.getY() -d.getY();
         double distancia = Math.sqrt(dx*dx + dy*dy);
         if(!volverABase && !escapandoDeJugador)
-            if((distancia < DISTANCIA_AGRESION)&& !volverABase)
+            if(((distancia < DISTANCIA_AGRESION)|| (distancia>DISTANCIA_SEPARACION_MAXIMA))&& !volverABase)
             contenerdorComportamiento.setComportamiento(comportamientoAtaque);
             else contenerdorComportamiento.setComportamiento(comportamientoDefault);
     }
