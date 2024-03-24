@@ -67,7 +67,7 @@ public class GUI extends JFrame {
 
     public void mostrarMensajeDerrota(int i){
         reproductorSonidos.reproducir(reproductorSonidos.getClipMuriendo());
-        JOptionPane.showMessageDialog(this, "perdiste sos malaso", getTitle(), 1);
+        JOptionPane.showMessageDialog(this, "Perdiste! vuelve a intentarlo despues de guardar tu puntaje", getTitle(), 1);
         String nombre =JOptionPane.showInputDialog(null,"Ingresa tu nombre");
         LectorDeTextos.agregarPuntaje(nombre, i);
         JOptionPane.showMessageDialog(this,"Puntajes mas altos:\n"+lectorScores.obtenerPuntajes(),getTitle(),1);
@@ -213,7 +213,7 @@ public class GUI extends JFrame {
     }
 
 	public void mostrarMensajeVictoria(int i) {
-        JOptionPane.showMessageDialog(this, "ganaste buenisimo", getTitle(), 1);
+        JOptionPane.showMessageDialog(this, "Felicitaciones! ganaste, guarda tu puntaje", getTitle(), 1);
         String nombre =JOptionPane.showInputDialog(null,"Ingresa tu nombre");
         LectorDeTextos.agregarPuntaje(nombre, i);
         JOptionPane.showMessageDialog(this,"Puntajes mas altos:\n"+lectorScores.obtenerPuntajes(),getTitle(),1);
