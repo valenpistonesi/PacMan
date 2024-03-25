@@ -20,7 +20,7 @@ public class Inky extends Fantasma{
         contenerdorComportamiento.setComportamiento(comportamientoDefault);
         comportamientoAtaque=new ComportamientoAgresivo();
         comportamientoPeligro = new ComportamientoMiedo();
-        imagen = new ImageIcon("src/assets/ghosts/inky.png");
+        imagen = new ImageIcon("PacMan/src/assets/ghosts/inky.png");
     }
     
     public void CrearRepGrafica(int sizeCelda){

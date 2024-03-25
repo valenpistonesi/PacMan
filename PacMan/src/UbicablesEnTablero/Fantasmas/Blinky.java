@@ -18,7 +18,7 @@ public class Blinky extends Fantasma{
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("src/assets/ghosts/blinky.png");
+        imagen = new ImageIcon("PacMan/src/assets/ghosts/blinky.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);;

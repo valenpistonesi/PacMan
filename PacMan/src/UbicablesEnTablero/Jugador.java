@@ -98,16 +98,16 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
     @Override
     public void CrearRepGrafica(int sizeCelda) {
         for (int i = 0; i<3; i++){   
-            imagen[i] = new ImageIcon("src/assets/PacMan/right/"+(i+1)+".png");
+            imagen[i] = new ImageIcon("PacMan/src/assets/PacMan/right/"+(i+1)+".png");
         }
         for (int i = 0; i<3; i++){
-            imagen[i+3*1] = new ImageIcon("src/assets/PacMan/down/"+(i+1)+".png");
+            imagen[i+3*1] = new ImageIcon("PacMan/src/assets/PacMan/down/"+(i+1)+".png");
         }
         for (int i = 0; i<3; i++){
-            imagen[i+3*2] = new ImageIcon("src/assets/PacMan/left/"+(i+1)+".png");
+            imagen[i+3*2] = new ImageIcon("PacMan/src/assets/PacMan/left/"+(i+1)+".png");
         }
         for (int i = 0; i<3; i++){
-            imagen[i+3*3] = new ImageIcon("src/assets/PacMan/up/"+(i+1)+".png");
+            imagen[i+3*3] = new ImageIcon("PacMan/src/assets/PacMan/up/"+(i+1)+".png");
         }
 
         repGrafica = new JLabel(); 

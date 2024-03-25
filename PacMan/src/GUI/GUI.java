@@ -167,8 +167,8 @@ public class GUI extends JFrame {
             this.setBounds(0,0,SIZE_CELDA*cantCeldasTablero+MARGEN_IZQUIERDO*2 , ALTO_PANEL_VIDAS);
             this.setBackground(Color.blue);
             this.setLayout(null);
-            vidaCompleta= new ImageIcon("src/assets/vidas/corazonLleno.png");
-            vidaVacia = new ImageIcon("src/assets/vidas/corazonVacio.png");
+            vidaCompleta= new ImageIcon("PacMan/src/assets/vidas/corazonLleno.png");
+            vidaVacia = new ImageIcon("PacMan/src/assets/vidas/corazonVacio.png");
             generarVidas(CANT_VIDAS);
 
             labelScore = new JLabel("Puntaje Total: 0");
@@ -227,13 +227,13 @@ public class GUI extends JFrame {
         public ReproductorDeSonidos(){
             AudioInputStream audioInput;
             try {
-                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmchomp.wav"));
+                audioInput = AudioSystem.getAudioInputStream(new File("PacMan/src/assets/sonidos/pmchomp.wav"));
                 pacManComiendo = AudioSystem.getClip();
                 pacManComiendo.open(audioInput);
-                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmdeath.wav"));
+                audioInput = AudioSystem.getAudioInputStream(new File("PacMan/src/assets/sonidos/pmdeath.wav"));
                 pacManMuriendo = AudioSystem.getClip();
                 pacManMuriendo.open(audioInput);
-                audioInput = AudioSystem.getAudioInputStream(new File("src/assets/sonidos/pmringtone.wav"));
+                audioInput = AudioSystem.getAudioInputStream(new File("PacMan/src/assets/sonidos/pmringtone.wav"));
                 inicioDelJuego = AudioSystem.getClip();
                 inicioDelJuego.open(audioInput);
             } catch (Exception e) {

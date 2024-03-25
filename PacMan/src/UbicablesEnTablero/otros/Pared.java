@@ -22,7 +22,7 @@ public class Pared implements EntidadRepresentable{
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("src/assets/other/pared.png");
+        imagen = new ImageIcon("PacMan/src/assets/other/pared.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);
