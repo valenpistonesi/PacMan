@@ -49,8 +49,8 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         comportamientoAtaque= new ComportamientoAgresivo();
         comportamientoPeligro = new ComportamientoMiedo();
         volverABase = false;
-        ojos = new ImageIcon("PacMan/src/assets/ghosts/ojosdefantasma.png");
-        miedo = new ImageIcon("PacMan/src/assets/ghosts/blueghost.png");
+        ojos = new ImageIcon("./src/assets/ghosts/ojosdefantasma.png");
+        miedo = new ImageIcon("./src/assets/ghosts/blueghost.png");
     }
     
     public abstract void CrearRepGrafica(int sizeCelda);

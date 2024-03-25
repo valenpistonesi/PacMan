@@ -23,7 +23,7 @@ public class Pinky extends Fantasma {
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("PacMan/src/assets/ghosts/pinky.png");
+        imagen = new ImageIcon("./src/assets/ghosts/pinky.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);

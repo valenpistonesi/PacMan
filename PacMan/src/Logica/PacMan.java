@@ -34,8 +34,9 @@ public class PacMan {
                 estado.reiniciarPuntaje();}
         }
 
-        if(estado.getPasarDeNivel())
+        if(estado.getPasarDeNivel()){
             gui.mostrarMensajeVictoria(estado.getPuntaje());
+        }
         System.out.println("fin del codigo");
     }
 }

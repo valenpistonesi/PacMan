@@ -27,7 +27,7 @@ public class Clyde extends Fantasma {
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("PacMan/src/assets/ghosts/clyde.png");
+        imagen = new ImageIcon("./src/assets/ghosts/clyde.png");
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);

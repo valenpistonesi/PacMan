@@ -8,7 +8,7 @@ public class Manzana extends Punto {
     public Manzana(int x, int y){
         super(x, y);
         puntos = 200;
-        imagen = new ImageIcon("PacMan/src/assets/other/apple.png");
+        imagen = new ImageIcon("./src/assets/other/apple.png");
 
     }
 

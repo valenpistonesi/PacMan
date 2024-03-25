@@ -16,7 +16,7 @@ public class LectorDeTextos {
     }
 
     public static void agregarPuntaje(String nombre, int puntaje) {
-        File file = new File("PacMan/src/GUI/Puntajes/puntajes.txt");
+        File file = new File("./src/GUI/Puntajes/puntajes.txt");
         TreeMap<Integer, String> puntajes = new TreeMap<>();
         try {
             if (file.exists()) {
@@ -43,7 +43,7 @@ public class LectorDeTextos {
     public String obtenerPuntajes(){
 
         StringBuilder puntajesStringBuilder = new StringBuilder();
-            File file = new File("PacMan/src/GUI/Puntajes/puntajes.txt");
+            File file = new File("./src/GUI/Puntajes/puntajes.txt");
             TreeMap<Integer, String> puntajes = new TreeMap<Integer,String>();
             try {
                 BufferedReader br = new BufferedReader(new FileReader(file));

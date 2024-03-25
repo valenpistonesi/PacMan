@@ -22,7 +22,7 @@ public class Punto implements EntidadRepresentable{
         parUbicacion.setX(x);
         parUbicacion.setY(y);
         puntos = 100;
-        imagen = new ImageIcon("PacMan/src/assets/other/dot.png");
+        imagen = new ImageIcon("./src/assets/other/dot.png");
     }
     
     public void CrearRepGrafica(int sizeCelda){

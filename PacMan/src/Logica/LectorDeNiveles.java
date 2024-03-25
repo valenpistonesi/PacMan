@@ -12,7 +12,7 @@ public class LectorDeNiveles {
     }
 
     public void readFile(int i){ 
-        File archivo = new File("PacMan/src/niveles/nivel"+i+".txt");
+        File archivo = new File("./src/niveles/nivel"+i+".txt");
         FileReader scanner;
         
         try {
