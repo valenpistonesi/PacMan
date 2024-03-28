@@ -2,6 +2,12 @@ package UbicablesEnTablero.Fantasmas;
 
 
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -49,8 +55,15 @@ public abstract class Fantasma implements EntidadRepresentable,EntidadConMovimie
         comportamientoAtaque= new ComportamientoAgresivo();
         comportamientoPeligro = new ComportamientoMiedo();
         volverABase = false;
-        ojos = new ImageIcon("./src/assets/ghosts/ojosdefantasma.png");
-        miedo = new ImageIcon("./src/assets/ghosts/blueghost.png");
+        
+        InputStream is1 = Fantasma.class.getResourceAsStream("ojosdefantasma.png");
+        InputStream is2 = Fantasma.class.getResourceAsStream("blueghost.png");
+    	try {
+    		ojos = new ImageIcon (ImageIO.read(is1));
+    		miedo = new ImageIcon (ImageIO.read(is2));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public abstract void CrearRepGrafica(int sizeCelda);

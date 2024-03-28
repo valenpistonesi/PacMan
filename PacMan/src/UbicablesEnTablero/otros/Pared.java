@@ -2,12 +2,18 @@ package UbicablesEnTablero.otros;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Interfaces.EntidadRepresentable;
 import UbicablesEnTablero.Jugador;
+import UbicablesEnTablero.Fantasmas.Inky;
 import Utilidades.DuplaDoble;
 
 public class Pared implements EntidadRepresentable{
@@ -22,7 +28,12 @@ public class Pared implements EntidadRepresentable{
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("./src/assets/other/pared.png");
+    	InputStream is =Pared.class.getResourceAsStream("pared.png");
+    	try {
+    		imagen = new ImageIcon (ImageIO.read(is));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);

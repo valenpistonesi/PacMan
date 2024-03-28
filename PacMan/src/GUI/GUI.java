@@ -2,10 +2,16 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -19,6 +25,7 @@ import javax.swing.JPanel;
 import Interfaces.EntidadConMovimiento;
 import Interfaces.EntidadRepresentable;
 import Logica.Tablero;
+import UbicablesEnTablero.Fantasmas.Clyde;
 import Utilidades.DuplaDoble;
 
 public class GUI extends JFrame {
@@ -167,8 +174,21 @@ public class GUI extends JFrame {
             this.setBounds(0,0,SIZE_CELDA*cantCeldasTablero+MARGEN_IZQUIERDO*2 , ALTO_PANEL_VIDAS);
             this.setBackground(Color.blue);
             this.setLayout(null);
-            vidaCompleta= new ImageIcon("./src/assets/vidas/corazonLleno.png");
-            vidaVacia = new ImageIcon("./src/assets/vidas/corazonVacio.png");
+                
+            InputStream is1 = PanelVidas.class.getResourceAsStream("corazonLleno.png");
+            InputStream is2 = PanelVidas.class.getResourceAsStream("corazonVacio.png");
+        	BufferedImage bi1;
+        	BufferedImage bi2;
+        	try {
+        		bi1 = ImageIO.read(is1);
+        		bi2 = ImageIO.read(is2);
+        		Image i1 = bi1;
+        		Image i2 = bi2;
+        		vidaCompleta = new ImageIcon (i1);
+        		vidaVacia = new ImageIcon (i2);
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
             generarVidas(CANT_VIDAS);
 
             labelScore = new JLabel("Puntaje Total: 0");
@@ -227,15 +247,27 @@ public class GUI extends JFrame {
         public ReproductorDeSonidos(){
             AudioInputStream audioInput;
             try {
-                audioInput = AudioSystem.getAudioInputStream(new File("./src/assets/sonidos/pmchomp.wav"));
+            	InputStream audioSrc = getClass().getResourceAsStream("pmchomp.wav");
+            	InputStream bufferedIn = new BufferedInputStream(audioSrc);
+            	AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
                 pacManComiendo = AudioSystem.getClip();
-                pacManComiendo.open(audioInput);
-                audioInput = AudioSystem.getAudioInputStream(new File("./src/assets/sonidos/pmdeath.wav"));
+                pacManComiendo.open(audioStream);
+                
+                audioSrc = getClass().getResourceAsStream("pmdeath.wav");
+            	bufferedIn = new BufferedInputStream(audioSrc);
+            	audioStream = AudioSystem.getAudioInputStream(bufferedIn);
                 pacManMuriendo = AudioSystem.getClip();
-                pacManMuriendo.open(audioInput);
-                audioInput = AudioSystem.getAudioInputStream(new File("./src/assets/sonidos/pmringtone.wav"));
+                pacManMuriendo.open(audioStream);
+                
+                audioSrc = getClass().getResourceAsStream("pmringtone.wav");
+            	bufferedIn = new BufferedInputStream(audioSrc);
+            	audioStream = AudioSystem.getAudioInputStream(bufferedIn);
                 inicioDelJuego = AudioSystem.getClip();
-                inicioDelJuego.open(audioInput);
+                inicioDelJuego.open(audioStream);
+                
+                
+                
+     
             } catch (Exception e) {
                 e.printStackTrace();
             }

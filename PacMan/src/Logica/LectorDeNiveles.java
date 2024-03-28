@@ -2,8 +2,10 @@ package Logica;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class LectorDeNiveles {
     private Tablero tablero;
@@ -12,7 +14,9 @@ public class LectorDeNiveles {
     }
 
     public void readFile(int i){ 
-        File archivo = new File("./src/niveles/nivel"+i+".txt");
+    	
+        //File archivo = new File("./src/niveles/nivel"+i+".txt");
+        File archivo = convertirISaFile(LectorDeNiveles.class.getResourceAsStream("nivel"+i+".txt"));
         FileReader scanner;
         
         try {
@@ -23,7 +27,7 @@ public class LectorDeNiveles {
             int y = 0;
             String palabra = b.readLine();    
             if(true){
-                //System.out.println("SE ENTRO EN EL IF");
+  
                 int sizeTablero = Integer.parseInt(b.readLine());
                 while(y<sizeTablero){
                     x = 0;
@@ -55,5 +59,24 @@ public class LectorDeNiveles {
         } catch (IOException e) {
             e.printStackTrace();
         }   
+    }
+    
+    public static File convertirISaFile(InputStream inputStream) {
+        try {
+            File toReturn = File.createTempFile("tempfile", ".tmp");
+            try (FileOutputStream fileOutputStream = new FileOutputStream(toReturn)) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    fileOutputStream.write(buffer, 0, bytesRead);
+                }
+            }
+
+            return toReturn;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

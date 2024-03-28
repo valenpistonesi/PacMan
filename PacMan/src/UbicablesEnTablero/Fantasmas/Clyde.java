@@ -1,7 +1,13 @@
 package UbicablesEnTablero.Fantasmas;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.awt.Color;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -27,7 +33,12 @@ public class Clyde extends Fantasma {
     }
     
     public void CrearRepGrafica(int sizeCelda){
-        imagen = new ImageIcon("./src/assets/ghosts/clyde.png");
+    	InputStream is = Clyde.class.getResourceAsStream("clyde.png");
+    	try {
+    		imagen = new ImageIcon (ImageIO.read(is));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));
         repGrafica.setForeground(Color.blue);

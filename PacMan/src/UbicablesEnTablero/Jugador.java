@@ -1,15 +1,19 @@
 package UbicablesEnTablero;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
 import Interfaces.EntidadConMovimiento;
 import Interfaces.EntidadRepresentable;
 import Logica.ObserverJugador.ObservadorJugador;
+import UbicablesEnTablero.otros.Manzana;
 import Utilidades.CuadruplaBooleana;
 import Utilidades.DuplaDoble;
 
 import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Jugador implements EntidadRepresentable, EntidadConMovimiento { 
     private final double multiplicadorDeVelocidad = 0.49;
@@ -97,18 +101,27 @@ public class Jugador implements EntidadRepresentable, EntidadConMovimiento {
 
     @Override
     public void CrearRepGrafica(int sizeCelda) {
-        for (int i = 0; i<3; i++){   
-            imagen[i] = new ImageIcon("./src/assets/PacMan/right/"+(i+1)+".png");
-        }
-        for (int i = 0; i<3; i++){
-            imagen[i+3*1] = new ImageIcon("./src/assets/PacMan/down/"+(i+1)+".png");
-        }
-        for (int i = 0; i<3; i++){
-            imagen[i+3*2] = new ImageIcon("./src/assets/PacMan/left/"+(i+1)+".png");
-        }
-        for (int i = 0; i<3; i++){
-            imagen[i+3*3] = new ImageIcon("./src/assets/PacMan/up/"+(i+1)+".png");
-        }
+    	InputStream is;
+    	try {
+	        for (int i = 0; i<3; i++){   
+	        	is =Jugador.class.getResourceAsStream("right"+(i+1)+".png");
+	            imagen[i] = new ImageIcon(ImageIO.read(is));
+	        }
+	        for (int i = 0; i<3; i++){
+	        	is =Jugador.class.getResourceAsStream("down"+(i+1)+".png");
+	            imagen[i+3*1] = new ImageIcon(ImageIO.read(is));
+	        }
+	        for (int i = 0; i<3; i++){
+	        	is =Jugador.class.getResourceAsStream("left"+(i+1)+".png");
+	            imagen[i+3*2] = new ImageIcon(ImageIO.read(is));
+	        }
+	        for (int i = 0; i<3; i++){
+	        	is =Jugador.class.getResourceAsStream("up"+(i+1)+".png");
+	            imagen[i+3*3] = new ImageIcon(ImageIO.read(is));
+	        }
+    	} catch (IOException e) {
+			e.printStackTrace();
+		}
 
         repGrafica = new JLabel(); 
         repGrafica.setSize(new Dimension(sizeCelda,sizeCelda));

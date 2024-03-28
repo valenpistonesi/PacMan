@@ -3,12 +3,18 @@ package UbicablesEnTablero.otros;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Interfaces.EntidadRepresentable;
 import UbicablesEnTablero.Jugador;
+import UbicablesEnTablero.Fantasmas.Inky;
 import Utilidades.DuplaDoble;
 
 public class Punto implements EntidadRepresentable{
@@ -22,7 +28,12 @@ public class Punto implements EntidadRepresentable{
         parUbicacion.setX(x);
         parUbicacion.setY(y);
         puntos = 100;
-        imagen = new ImageIcon("./src/assets/other/dot.png");
+        InputStream is =Punto.class.getResourceAsStream("dot.png");
+    	try {
+    		imagen = new ImageIcon (ImageIO.read(is));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public void CrearRepGrafica(int sizeCelda){
